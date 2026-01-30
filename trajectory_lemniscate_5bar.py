@@ -249,6 +249,7 @@ start_time = time.time()  # Record the start time
 next_time = start_time + dt  # Calculate the next time to send a command
 
 # Iterate over the length of th1 and th2 (which are the same length)
+idx=0
 for i in range(len(th1_vec)):
     while time.time() < next_time:  # Wait until dt has elapsed
         time.sleep(0.001)  # Sleep for 1 millisecond
@@ -257,10 +258,18 @@ for i in range(len(th1_vec)):
     # my5bar.setRobotState([[th1_vec[i], th1_dot_vec[i]], [th2_vec[i], th2_dot_vec[i]]])
     fb = my5bar.setGetRobotState([[th1_vec[i], th1_dot_vec[i]], [th2_vec[i], th2_dot_vec[i]]])
     if fb != -1:
-        [[th1_fb[i], th1_dot_fb[i]], [th2_fb[i], th2_dot_fb[i]]] = fb
-        t_fb[i] = time.time() - start_time
+        [[th1_fb[idx], th1_dot_fb[idx]], [th2_fb[idx], th2_dot_fb[idx]]] = fb
+        t_fb[idx] = time.time() - start_time
+        idx += 1
     # Update the next time for the next command
     next_time += dt
+
+# Adjust the size of feedback arrays in case of missed data
+th1_fb = th1_fb[:idx]
+th2_fb = th2_fb[:idx]
+th1_dot_fb = th1_dot_fb[:idx]
+th2_dot_fb = th2_dot_fb[:idx]
+t_fb = t_fb[:idx]
 
 sleep(1)
 my5bar.penUp()
