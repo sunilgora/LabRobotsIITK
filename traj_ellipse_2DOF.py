@@ -530,7 +530,7 @@ try:
 
 except:
     #Run mujoco simulation with the planned trajectory if robot operation fails
-    # mj_sim(m,d,t_vec,th1_vec,th2_vec,xy_vec)    
+    mj_sim(m,d,t_vec,th1_vec,th2_vec,xy_vec)    
     # # trajdata=pickle.load(open(os.path.join(dir,'traj_5bar.pkl'), 'rb'))
     # # x_vec,y_vec=trajdata[0],trajdata[1]
     # # t_vec, th1_vec,th2_vec,t_vec,th1_dot_vec,th2_dot_vec = trajdata[2],trajdata[3],trajdata[4],trajdata[5],trajdata[6]
@@ -541,17 +541,17 @@ except:
     # # save t_fb, th2_fb as .dat file
     # np.savetxt(os.path.join(dir,'th2actdata.dat'), np.column_stack((t_fb, th2_fb)), delimiter='\t', header='Time\tth2_fb')
 
-    #Plan linear trajectory and track in MuJoCo
-    x1y1 = [0.25, -0.1]
-    x2y2 = [0.25, 0.1]
-    T = 1
-    th1_vec,th2_vec,t_vec,xy_vec =line_track(x1y1,x2y2,T)
-    mj_sim(m,d,t_vec,th1_vec,th2_vec,xy_vec,ti=1,isDone=False)
+    # #Plan linear trajectory and track in MuJoCo
+    # x1y1 = [0.25, -0.1]
+    # x2y2 = [0.25, 0.1]
+    # T = 1
+    # th1_vec,th2_vec,t_vec,xy_vec =line_track(x1y1,x2y2,T)
+    # mj_sim(m,d,t_vec,th1_vec,th2_vec,xy_vec,ti=1,isDone=False)
 
-    x1y1 = [0.25, 0.1]
-    x2y2 = [0.2, 0.1]
-    T = 1
-    th1_vec,th2_vec,t_vec,xy_vec =line_track(x1y1,x2y2,T)
-    mj_sim(m,d,t_vec,th1_vec,th2_vec,xy_vec,ti=0,isDone=True)    
+    # x1y1 = [0.25, 0.1]
+    # x2y2 = [0.2, 0.1]
+    # T = 1
+    # th1_vec,th2_vec,t_vec,xy_vec =line_track(x1y1,x2y2,T)
+    # mj_sim(m,d,t_vec,th1_vec,th2_vec,xy_vec,ti=0,isDone=True)    
 
 
